@@ -1,0 +1,14 @@
+opencv-python
+pytorch
+flask
+os
+time
+werkzeug
+PIL
+json
+pandas
+numpy
+matplotlib
+cv2
+glob
+xml
