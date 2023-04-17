@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Bank Card Number Extraction</title>
+   <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+   <link rel="icon" type="image/x-icon" href="http://127.0.0.1:8887/favicon.ico">
+   <style>
+      #hint {
+         position: absolute;
+         border: 1px solid red;
+         top: 100px;
+         width: 300px;
+         height: 500px;
+      }
+
+      body {
+         background-color: #222;
+         color: #fff;
+      }
+
+      /* Style for the page title */
+      h1 {
+         font-size: 32px;
+         text-align: center;
+      }
+
+      /* Style for the file upload button */
+      input[type="file"] {
+         display: block;
+         margin: 0 auto;
+         font-size: 20px;
+      }
+
+      /* Style for the image preview */
+      #image-preview {
+         display: block;
+         margin: 0 auto;
+      }
+
+      #image-hint {
+         position: absolute;
+         display: block;
+         top: 50px;
+      }
+
+      /* Style for the submit button */
+      #number {
+         display: block;
+         margin: 20px auto;
+         font-size: 20px;
+         padding: 10px;
+         background-color: #008CBA;
+         color: #fff;
+         border: none;
+         border-radius: 5px;
+      }
+
+      #number:hover {
+         background-color: #005f7f;
+         cursor: pointer;
+      }
+
+      #number:disabled {
+         background-color: #aaa;
+         cursor: not-allowed;
+      }
+
+      img[src=""] {
+         display: none;
+      }
+
+      /* Style for the number display */
+      p {
+         font-size: 15px;
+         text-align: center;
+         margin-top: 20px;
+      }
+
+      t {
+         font-size: 15px;
+         margin-top: 10px;
+      }
+   </style>
+</head>
+
+<body>
+
+   <h1>Bank Card Number Extraction</h1>
+
+   <form action="/" method="POST" enctype="multipart/form-data">
+      <input class="il" type="file" name="file" id="img"
+         onchange="document.getElementById('image-preview').src = window.URL.createObjectURL(this.files[0])">
+      <input type="submit" value="Submit" id="number"/>
+      <br><br>
+      <img id="image-preview" src="{{ image }}" alt="Preview Image" width="660" height="416">
+      <br><br>
+      {% if title is defined %}
+      <p id="result">Number: {{ title }}</p>
+      {% endif %}
+   </form>
+
+   <script>
+      $(document).ready(function () {
+         if ($('#image-preview').attr('src') == '{{ image }}') {
+            $('#image-preview').hide()
+         }
+         $('#img').change(function () {
+            $('#image-preview').attr('src', window.URL.createObjectURL(this.files[0]))
+            $('#number').prop('disabled', false)
+            $('#image-preview').show()
+            $('#result').remove()
+         });
+      });
+   </script>
+</body>
+
+</html>
