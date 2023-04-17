@@ -12,3 +12,4 @@ matplotlib
 cv2
 glob
 xml
+torch
